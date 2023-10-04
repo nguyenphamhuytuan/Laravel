@@ -1,0 +1,53 @@
+@extends('home')
+
+@section('content')
+@section('page-js')
+@if(session('status'))
+        <script>
+            Swal.fire("{{session('status')}}");
+        </script>
+        
+        @endif
+    @endsection
+<form method="POST" action="{{route('san-pham.xl-them-moi')}}" enctype="multipart/form-data">
+    @csrf
+    <table border=0>
+
+        <tr>
+            <th>IMAGE</th>
+            <td><input type="file" name="image" /></td>
+        </tr>
+        <tr>
+            <th>NAME</th>
+            <td><input type="text" name="name" /></td>
+        </tr>
+        <tr>
+            <th>DESCRIPTION</th>
+            <td><input type="text" name="description" /></td>
+        </tr>
+        
+        <tr>
+            <th>QUANTITY</th>
+            <td><input type="text" name="quantity" /></td>
+        </tr>
+        <tr>
+            <th>LOAI</th>
+            <td><select name="loai" id="loai">
+                <option selected>Chọn loại sản phẩm</option>
+                @foreach($dsLoai as $loai)
+                <option value="{{$loai->id}}">{{$loai->ten}}</option>
+                @endforeach
+            </select></td>
+        </tr>
+        <tr>
+            <th>PRICE</th>
+            <td><input type="text" name="price" /></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><button type="submit">Luu</button></td>
+        </tr>
+    </table>
+</form>
+
+@endsection
