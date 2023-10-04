@@ -1,0 +1,38 @@
+@extends('home')
+@section('content')
+
+<h1>DANH SÁCH SẢN PHẨM</h1>
+    <a href="{{route('san-pham.them-moi')}}"><button type="button" class="btn btn-primary">Thêm mới</button></a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</td>
+                <th>IMG</td>
+                <th>NAME</th>
+                <th>DESCRIPTION</th>
+                <th>QUANTITY</th>
+                <th>CATEGORY</th>
+                <th>PRICE</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach($dsSanPham as $sanPham)
+            <tr>
+
+                <td> {{ $sanPham->id }}</td>
+                
+                <td><img style="with:50px;height:50px" src="{{ asset('storage/images/' . $sanPham->img) }}" alt="{{ $sanPham->img }}" /></td>
+                <td>{{ $sanPham->name }}</td>
+                <td>{{ $sanPham->description }}</td>
+                <td>{{ $sanPham->quantity }}</td>
+                <td>{{ $sanPham->loai->ten }}</td>
+                <td>{{ $sanPham->price  }}</td>
+                <td>
+                <a href="{{route('san-pham.cap-nhat',['id'=>$sanPham->id])}}"><button type="button" class="btn btn-warning">Edit</button></a> | <a href="{{route('san-pham.xoa',['id'=>$sanPham->id])}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                </td>
+            <tr>
+ @endforeach
+        </tbody>
+    </table>
+@endsection
